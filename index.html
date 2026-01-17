@@ -178,18 +178,43 @@
     </header>
 
     <section class="hero">
-        <h1>Any Game. Same Prize. <span>₹50.</span></h1>
+        <h1>Any Game. <span>₹50.</span></h1>
         <div class="checker-container">
             <div class="checker-title">SYSTEM COMPATIBILITY CHECK</div>
             <select id="userRam" class="checker-input"><option value="0">RAM SIZE</option><option value="4">4GB</option><option value="8">8GB</option><option value="12">12GB</option><option value="16">16GB+</option></select>
-            <select id="userGpu" class="checker-input"><option value="0">GPU SERIES</option><option value="1">Low End</option><option value="2">GTX Series</option><option value="3">RTX Series</option><option value="4">High End</option></select>
+            <select id="userGpu" class="checker-input"><option value="0">GPU POWER</option><option value="1">Low End</option><option value="2">GTX Series</option><option value="3">RTX Series</option><option value="4">High End</option></select>
             <button class="check-btn" onclick="checkSystem()">RUN</button>
             <div id="check-result"></div>
         </div>
 
+        <div style="max-width: 800px; margin: 0 auto 3rem; padding: 20px; background: rgba(0, 114, 206, 0.05); border-radius: 15px; border: 1px dashed var(--ps-blue); text-align: left;">
+            <h3 style="font-family: 'Orbitron'; font-size: 0.8rem; color: var(--ps-glow); margin-bottom: 15px; text-align: center; letter-spacing: 2px;">DELIVERY PROCESS</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; font-family: 'Rajdhani';">
+                <div style="display: flex; gap: 10px; align-items: start;">
+                    <span style="color: var(--ps-glow); font-weight: bold;">1)</span>
+                    <p style="font-size: 0.9rem; color: #ccc;">After paying and verifying your transaction.</p>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: start;">
+                    <span style="color: var(--ps-glow); font-weight: bold;">2)</span>
+                    <p style="font-size: 0.9rem; color: #ccc;">You will receive a torrent file in your email.</p>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: start;">
+                    <span style="color: var(--ps-glow); font-weight: bold;">3)</span>
+                    <p style="font-size: 0.9rem; color: #ccc;">Download the <strong>qBittorrent</strong> (software) for free.</p>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: start;">
+                    <span style="color: var(--ps-glow); font-weight: bold;">4)</span>
+                    <p style="font-size: 0.9rem; color: #ccc;">Put that torrent in the software and download it.</p>
+                </div>
+            </div>
+            <div style="margin-top: 20px; text-align: center; font-family: 'Orbitron'; font-size: 1.1rem; color: var(--success); text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);">
+                HOOLA!! NOW YOU HAVE YOUR GAME..!!
+            </div>
+        </div>
+
         <div class="how-it-works">
             <div class="step-card"><i class="fa-solid fa-cart-arrow-down"></i><h4>1. SELECT</h4><p>Add your favorites for ₹50 each.</p></div>
-            <div class="step-card"><i class="fa-solid fa-qrcode"></i><h4>2. PAY</h4><p>Send UPI screenshot to WhatsApp(+91 8329719189).</p></div>
+            <div class="step-card"><i class="fa-solid fa-qrcode"></i><h4>2. PAY</h4><p>Send UPI screenshot to WhatsApp.</p></div>
             <div class="step-card"><i class="fa-solid fa-cloud-arrow-down"></i><h4>3. PLAY</h4><p>Receive your link instantly.</p></div>
         </div>
     </section>
@@ -409,3 +434,4 @@
 </body>
 
 </html>
+
