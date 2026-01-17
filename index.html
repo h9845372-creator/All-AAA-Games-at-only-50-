@@ -37,7 +37,6 @@
             text-transform: uppercase;
         }
 
-        /* DONATION SECTION STYLE */
         .donation-section { max-width: 900px; margin: 4rem auto 0; padding: 30px; background: rgba(0, 114, 206, 0.1); border: 1px solid var(--ps-blue); border-radius: 15px; text-align: center; backdrop-filter: blur(5px); }
         .donation-title { font-family: 'Orbitron'; color: var(--gold); margin-bottom: 10px; font-size: 1.2rem; }
         .donation-text { font-family: 'Rajdhani'; color: #8b949e; margin-bottom: 20px; font-size: 1rem; }
@@ -134,7 +133,6 @@
         .modal-input { width: 100%; padding: 12px; margin-bottom: 12px; background: #0d1117; border: 1px solid var(--accent); color: white; border-radius: 5px; font-family: 'Rajdhani'; outline: none; }
         .modal-input:focus { border-color: var(--ps-glow); }
 
-        /* Floating WhatsApp Button */
         .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: var(--whatsapp); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 2px 2px 20px rgba(0,0,0,0.5); z-index: 10000; text-decoration: none; }
         .whatsapp-float:hover { transform: scale(1.1); }
         .whatsapp-label { position: absolute; right: 70px; background: white; color: black; padding: 5px 10px; border-radius: 5px; font-size: 12px; font-family: 'Rajdhani'; font-weight: bold; white-space: nowrap; }
@@ -156,7 +154,7 @@
 
     <div id="cart-sidebar">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--accent); padding-bottom: 15px;">
-            <h3 style="font-family:'Orbitron'; color:var(--ps-glow);">MY CART</h3>
+            <h3 style="font-family:'Orbitron'; color:var(--ps-glow);">MY LIBRARY</h3>
             <i class="fa-solid fa-xmark" onclick="toggleCart()" style="cursor:pointer; font-size:1.5rem;"></i>
         </div>
         <div id="cart-list" style="flex:1; margin-top:20px; overflow-y:auto;"></div>
@@ -232,7 +230,7 @@
         <div class="faq-container">
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">HOW DO I KNOW THIS IS TRUSTED? <i class="fa-solid fa-chevron-down"></i></div>
-                <div class="faq-answer">We have over 11,278+ happy customers. Our live sales notification (bottom-left) shows real-time purchases. We value our reputation above all else.</div>
+                <div class="faq-answer">We have over 10,000+ happy customers. Our live sales notification (bottom-left) shows real-time purchases. We value our reputation above all else.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">WHAT IF THE LINK DOESN'T WORK? <i class="fa-solid fa-chevron-down"></i></div>
@@ -245,15 +243,15 @@
         <div class="modal">
             <i class="fa-solid fa-shield-check" style="font-size: 2.5rem; color: var(--success); margin-bottom: 15px;"></i>
             <h2 id="modalTitle">SECURE PAYMENT</h2>
-            <p style="font-size:0.8rem; opacity:0.7;" id="modalDesc">Copy UPI ID • 100% Trusted Gateway • Game Will Be Sent To Your E-Mail Within 1 HOUR(Assured)</p>
+            <p style="font-size:0.8rem; opacity:0.7;" id="modalDesc">Copy UPI ID • 100% Trusted Gateway</p>
             <div class="upi-box">
-                <span class="upi-id" id="upiIdText">devimanju1203@okicici</span>
+                <span class="upi-id" id="upiIdText">lowprice@upi</span>
                 <button class="copy-btn" onclick="copyUPI()">COPY</button>
             </div>
 
             <form action="https://formspree.io/f/xojjjqbo" method="POST" id="salesForm" style="margin-top: 15px;">
                 <input type="text" name="name" placeholder="YOUR NAME" required class="modal-input">
-                <input type="email" name="email" placeholder="YOUR EMAIL (GAME WILL BE SENT HERE)" required class="modal-input">
+                <input type="email" name="email" placeholder="YOUR EMAIL (TO RECEIVE GAME)" required class="modal-input">
                 <input type="text" name="transaction_id" placeholder="UPI TRANSACTION ID" required class="modal-input">
                 <input type="hidden" name="cart_items" id="hiddenCartInput">
                 <input type="hidden" name="_subject" value="New Game Order Recieved!">
@@ -280,32 +278,40 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/+91 8329719189?text=I%20need%20help%20with%20my%20order" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/910000000000?text=I%20need%20help%20with%20my%20order" class="whatsapp-float" target="_blank">
         <i class="fa-brands fa-whatsapp"></i>
         <span class="whatsapp-label">SUPPORT</span>
     </a>
 
     <script>
         const games = [
-    { name: "GTA VI (Early Access)", img: "gta6.jpg", old: 5999, ram: 16, tag: "hot" },
-    { name: "Black Myth: Wukong", img: "wukong.jpg", old: 3999, ram: 16, tag: "hot" },
-    { name: "Dragon Ball: Sparking! ZERO", img: "dbz.jpg", old: 4299, ram: 12, tag: "new" },
-    { name: "Resident Evil: Requiem", img: "re_req.jpg", old: 4499, ram: 16, tag: "new" },
-    { name: "GTA V (Premium Edition)", img: "gta5.jpg", old: 2499, ram: 8, tag: "best" },
-    { name: "Red Dead Redemption 2", img: "rdr2.jpg", old: 3199, ram: 12, tag: "best" },
-    { name: "Forza Horizon 5", img: "forza5.jpg", old: 3499, ram: 8, tag: "best" },
-    { name: "God of War Ragnarök", img: "gow.jpg", old: 4499, ram: 16 },
-    { name: "Spider-Man: Miles Morales", img: "spiderman.jpg", old: 3299, ram: 12 },
-    { name: "Call of Duty: Black Ops 7", img: "cod7.jpg", old: 5499, ram: 16, tag: "hot" },
-    { name: "Assassin's Creed Shadows", img: "ac_shadows.jpg", old: 4999, ram: 16, tag: "new" },
-    { name: "EA SPORTS FC 26", img: "fc26.jpg", old: 4799, ram: 12, tag: "hot" },
-    { name: "Marvel's Wolverine", img: "wolverine.jpg", old: 4999, ram: 16, tag: "new" },
-    { name: "Cyberpunk 2077 (Ultimate)", img: "cyberpunk.jpg", old: 2999, ram: 12 },
-    { name: "Hogwarts Legacy", img: "hogwarts.jpg", old: 3999, ram: 16, tag: "best" },
-    { name: "Elden Ring: Shadow of Erdtree", img: "elden.jpg", old: 3599, ram: 12, tag: "hot" },
-    { name: "Ghost of Tsushima", img: "ghost.jpg", old: 3499, ram: 16 },
-    { name: "Tekken 8", img: "tekken8.jpg", old: 4199, ram: 16 }
-];          
+            // --- VIRAL HITS ---
+            { name: "GTA VI (Early Access)", img: "gta6.jpg", old: 5999, ram: 16, tag: "hot" },
+            { name: "Black Myth: Wukong", img: "wukong.jpg", old: 3999, ram: 16, tag: "hot" },
+            { name: "Dragon Ball: Sparking! ZERO", img: "dbz.jpg", old: 4299, ram: 12, tag: "new" },
+            
+            // --- TRENDING & PREVIOUS CLASSICS ---
+            { name: "God of War Ragnarök", img: "gow.jpg", old: 4499, ram: 16, tag: "hot" },
+            { name: "Ghost of Tsushima", img: "ghost.jpg", old: 3499, ram: 16, tag: "best" },
+            { name: "GTA V (Premium Edition)", img: "gta5.jpg", old: 2499, ram: 8, tag: "best" },
+            { name: "Red Dead Redemption 2", img: "rdr2.jpg", old: 3199, ram: 12, tag: "best" },
+            { name: "Spider-Man: Miles Morales", img: "spiderman.jpg", old: 3299, ram: 12 },
+            { name: "Cyberpunk 2077 (Ultimate)", img: "cyberpunk.jpg", old: 2999, ram: 12, tag: "new" },
+            { name: "Elden Ring: Shadow of Erdtree", img: "elden.jpg", old: 3599, ram: 12, tag: "hot" },
+            
+            // --- SPORTS & ACTION ---
+            { name: "EA SPORTS FC 26", img: "fc26.jpg", old: 4799, ram: 12, tag: "new" },
+            { name: "Tekken 8", img: "tekken8.jpg", old: 4199, ram: 16 },
+            { name: "Forza Horizon 5", img: "forza.jpg", old: 3499, ram: 8, tag: "best" },
+            { name: "Forza Horizon 4", img: "fh4.jpg", old: 2499, ram: 8 },
+            { name: "Resident Evil 4 Remake", img: "re4.jpg", old: 3599, ram: 8 },
+            
+            // --- OTHERS ---
+            { name: "Alan Wake 2", img: "alanwake2.jpg", old: 3499, ram: 16 },
+            { name: "Hogwarts Legacy", img: "hogwarts.jpg", old: 3999, ram: 16, tag: "best" },
+            { name: "Minecraft", img: "minecraft.jpg", old: 1999, ram: 4 },
+            { name: "God of War (2018)", img: "gow2018.jpg", old: 3299, ram: 8 }
+        ];
 
         let cart = [];
 
@@ -325,7 +331,7 @@
             `).join('');
         }
 
-        const users = ["Rahul K.", "Aryan Gup.", "Vikramx101", "Snehaurp", "Kabir S.", "Rohitxlive", "Sameer KUMARI", "Zoya Khan", "Abhay tiwari", "Piyush Chaddhe", "harshurfather", "user1563p", "user2937hd", "user2937h"];
+        const users = ["Rahul K.", "Aryan Gup.", "Vikramx101", "Snehaurp", "Kabir S.", "Rohitxlive", "Sameer KUMARI", "Zoya Khan", "Abhay tiwari", "Piyush Chaddhe", "harshurfather"];
         function showLivePurchase() {
             const popup = document.getElementById('live-purchase');
             if(!popup) return;
@@ -371,7 +377,7 @@
                         <img src="${item.img}" class="cart-item-img" onerror="this.src='https://via.placeholder.com/60x80/111/00d4ff?text=G'">
                         <div class="cart-item-info">
                             <div class="cart-item-name">${item.name}</div>
-                            <div class="cart-item-details">By-LowPricePlay | ₹50</div>
+                            <div class="cart-item-details">PC VERSION | ₹50</div>
                         </div>
                         <i class="fa-solid fa-trash-can remove-item" onclick="removeFromCart(${idx})"></i>
                     </div>
@@ -386,12 +392,9 @@
         function checkout() { 
             if(cart.length > 0) {
                 document.getElementById('modalTitle').innerText = "SECURE PAYMENT";
-                document.getElementById('modalDesc').innerText = "Copy UPI ID • 100% Trusted Gateway • You Will Recieve Your Game In Your E-MAIL Within 1 Hour(Assured)";
-                
-                // Add Cart Data to Hidden Form Input
+                document.getElementById('modalDesc').innerText = "Copy UPI ID • 100% Trusted Gateway";
                 const cartData = cart.map(item => item.name).join(', ');
                 document.getElementById('hiddenCartInput').value = cartData;
-                
                 document.getElementById('payModal').style.display = 'flex'; 
             }
         }
@@ -433,9 +436,4 @@
         updateCart();
     </script>
 </body>
-
 </html>
-
-
-
-
