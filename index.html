@@ -156,7 +156,7 @@
 
     <div id="cart-sidebar">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--accent); padding-bottom: 15px;">
-            <h3 style="font-family:'Orbitron'; color:var(--ps-glow);">MY LIBRARY</h3>
+            <h3 style="font-family:'Orbitron'; color:var(--ps-glow);">MY CART</h3>
             <i class="fa-solid fa-xmark" onclick="toggleCart()" style="cursor:pointer; font-size:1.5rem;"></i>
         </div>
         <div id="cart-list" style="flex:1; margin-top:20px; overflow-y:auto;"></div>
@@ -178,18 +178,18 @@
     </header>
 
     <section class="hero">
-        <h1>Any Game. <span>₹50.</span></h1>
+        <h1>Any Game. Same Prize. <span>₹50.</span></h1>
         <div class="checker-container">
             <div class="checker-title">SYSTEM COMPATIBILITY CHECK</div>
             <select id="userRam" class="checker-input"><option value="0">RAM SIZE</option><option value="4">4GB</option><option value="8">8GB</option><option value="12">12GB</option><option value="16">16GB+</option></select>
-            <select id="userGpu" class="checker-input"><option value="0">GPU POWER</option><option value="1">Low End</option><option value="2">GTX Series</option><option value="3">RTX Series</option><option value="4">High End</option></select>
+            <select id="userGpu" class="checker-input"><option value="0">GPU SERIES</option><option value="1">Low End</option><option value="2">GTX Series</option><option value="3">RTX Series</option><option value="4">High End</option></select>
             <button class="check-btn" onclick="checkSystem()">RUN</button>
             <div id="check-result"></div>
         </div>
 
         <div class="how-it-works">
             <div class="step-card"><i class="fa-solid fa-cart-arrow-down"></i><h4>1. SELECT</h4><p>Add your favorites for ₹50 each.</p></div>
-            <div class="step-card"><i class="fa-solid fa-qrcode"></i><h4>2. PAY</h4><p>Send UPI screenshot to WhatsApp.</p></div>
+            <div class="step-card"><i class="fa-solid fa-qrcode"></i><h4>2. PAY</h4><p>Send UPI screenshot to WhatsApp(+91 8329719189).</p></div>
             <div class="step-card"><i class="fa-solid fa-cloud-arrow-down"></i><h4>3. PLAY</h4><p>Receive your link instantly.</p></div>
         </div>
     </section>
@@ -207,7 +207,7 @@
         <div class="faq-container">
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">HOW DO I KNOW THIS IS TRUSTED? <i class="fa-solid fa-chevron-down"></i></div>
-                <div class="faq-answer">We have over 10,000+ happy customers. Our live sales notification (bottom-left) shows real-time purchases. We value our reputation above all else.</div>
+                <div class="faq-answer">We have over 11,278+ happy customers. Our live sales notification (bottom-left) shows real-time purchases. We value our reputation above all else.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">WHAT IF THE LINK DOESN'T WORK? <i class="fa-solid fa-chevron-down"></i></div>
@@ -220,15 +220,15 @@
         <div class="modal">
             <i class="fa-solid fa-shield-check" style="font-size: 2.5rem; color: var(--success); margin-bottom: 15px;"></i>
             <h2 id="modalTitle">SECURE PAYMENT</h2>
-            <p style="font-size:0.8rem; opacity:0.7;" id="modalDesc">Copy UPI ID • 100% Trusted Gateway</p>
+            <p style="font-size:0.8rem; opacity:0.7;" id="modalDesc">Copy UPI ID • 100% Trusted Gateway • Game Will Be Sent To Your E-Mail Within 1 HOUR(Assured)</p>
             <div class="upi-box">
-                <span class="upi-id" id="upiIdText">lowprice@upi</span>
+                <span class="upi-id" id="upiIdText">devimanju1203@okicici</span>
                 <button class="copy-btn" onclick="copyUPI()">COPY</button>
             </div>
 
             <form action="https://formspree.io/f/xojjjqbo" method="POST" id="salesForm" style="margin-top: 15px;">
                 <input type="text" name="name" placeholder="YOUR NAME" required class="modal-input">
-                <input type="email" name="email" placeholder="YOUR EMAIL (TO RECEIVE GAME)" required class="modal-input">
+                <input type="email" name="email" placeholder="YOUR EMAIL (GAME WILL BE SENT HERE)" required class="modal-input">
                 <input type="text" name="transaction_id" placeholder="UPI TRANSACTION ID" required class="modal-input">
                 <input type="hidden" name="cart_items" id="hiddenCartInput">
                 <input type="hidden" name="_subject" value="New Game Order Recieved!">
@@ -255,7 +255,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/910000000000?text=I%20need%20help%20with%20my%20order" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/+91 8329719189?text=I%20need%20help%20with%20my%20order" class="whatsapp-float" target="_blank">
         <i class="fa-brands fa-whatsapp"></i>
         <span class="whatsapp-label">SUPPORT</span>
     </a>
@@ -299,7 +299,7 @@
             `).join('');
         }
 
-        const users = ["Rahul K.", "Aryan Gup.", "Vikramx101", "Snehaurp", "Kabir S.", "Rohitxlive", "Sameer KUMARI", "Zoya Khan", "Abhay tiwari", "Piyush Chaddhe", "harshurfather"];
+        const users = ["Rahul K.", "Aryan Gup.", "Vikramx101", "Snehaurp", "Kabir S.", "Rohitxlive", "Sameer KUMARI", "Zoya Khan", "Abhay tiwari", "Piyush Chaddhe", "harshurfather", "user1563p", "user2937hd", "user2937h"];
         function showLivePurchase() {
             const popup = document.getElementById('live-purchase');
             if(!popup) return;
@@ -345,7 +345,7 @@
                         <img src="${item.img}" class="cart-item-img" onerror="this.src='https://via.placeholder.com/60x80/111/00d4ff?text=G'">
                         <div class="cart-item-info">
                             <div class="cart-item-name">${item.name}</div>
-                            <div class="cart-item-details">PC VERSION | ₹50</div>
+                            <div class="cart-item-details">By-LowPricePlay | ₹50</div>
                         </div>
                         <i class="fa-solid fa-trash-can remove-item" onclick="removeFromCart(${idx})"></i>
                     </div>
@@ -360,7 +360,7 @@
         function checkout() { 
             if(cart.length > 0) {
                 document.getElementById('modalTitle').innerText = "SECURE PAYMENT";
-                document.getElementById('modalDesc').innerText = "Copy UPI ID • 100% Trusted Gateway";
+                document.getElementById('modalDesc').innerText = "Copy UPI ID • 100% Trusted Gateway • You Will Recieve Your Game In Your E-MAIL Within 1 Hour(Assured)";
                 
                 // Add Cart Data to Hidden Form Input
                 const cartData = cart.map(item => item.name).join(', ');
@@ -407,4 +407,5 @@
         updateCart();
     </script>
 </body>
+
 </html>
