@@ -145,6 +145,21 @@
         .trust-top-bar { background: linear-gradient(90deg, #0072ce, #00d4ff); color: black; font-family: 'Orbitron'; font-size: 0.65rem; font-weight: 900; text-align: center; padding: 5px 0; text-transform: uppercase; display: flex; justify-content: center; align-items: center; gap: 20px; position: relative; z-index: 1001; }
         #live-purchase { position: fixed; bottom: 20px; left: 20px; background: rgba(0, 0, 0, 0.9); border-left: 4px solid var(--ps-glow); padding: 12px 20px; border-radius: 8px; display: flex; align-items: center; gap: 15px; z-index: 10000; transform: translateX(-150%); border: 1px solid var(--accent); }
         #live-purchase.show { transform: translateX(0); }
+        
+        /* AD SLOT STYLING */
+        .ad-slot {
+            grid-column: 1 / -1; 
+            background: transparent; 
+            border: 1px dashed var(--accent); 
+            height: auto; 
+            min-height: 120px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            opacity: 1; 
+            transform: none;
+            position: relative;
+        }
     </style>
 </head>
 <body>
@@ -173,12 +188,12 @@
     </header>
 
     <section class="hero">
-        <h1>Any Game. Same Prize.-<span>₹50.</span></h1>
+        <h1>Any Game. <span>₹50.</span></h1>
         
         <div class="tracker">
             <div class="step active" id="step1"><i class="fa-solid fa-1"></i> SELECT GAME</div>
-            <div class="step" id="step2"><i class="fa-solid fa-2"></i> PAY VIA UPI</div>
-            <div class="step" id="step3"><i class="fa-solid fa-3"></i> GET LINK IN YOUR E-MAIL.</div>
+            <div class="step" id="step2"><i class="fa-solid fa-2"></i> PAY UPI</div>
+            <div class="step" id="step3"><i class="fa-solid fa-3"></i> GET LINK</div>
         </div>
 
         <div class="checker-container">
@@ -191,9 +206,9 @@
         <div style="max-width: 800px; margin: 0 auto 3rem; padding: 25px; background: rgba(0, 114, 206, 0.05); border-radius: 15px; border: 1px dashed var(--ps-blue); text-align: left;">
             <h3 style="font-family: 'Orbitron'; font-size: 0.8rem; color: var(--ps-glow); margin-bottom: 20px; text-align: center;">HOW YOU WILL GET YOUR GAME</h3>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; font-family: 'Rajdhani';">
-                <div><span style="color:var(--ps-glow);">1.</span> Pay UPI & Submit ID on the Buying page.</div>
-                <div><span style="color:var(--ps-glow);">2.</span> Recieve the Torrent file on Email.</div>
-                <div><span style="color:var(--ps-glow);">3.</span> Open qBittorrent, paste the link, and install it.</div>
+                <div><span style="color:var(--ps-glow);">1.</span> Pay UPI & Submit ID.</div>
+                <div><span style="color:var(--ps-glow);">2.</span> Get Torrent file on Email.</div>
+                <div><span style="color:var(--ps-glow);">3.</span> Open qBittorrent.</div>
                 <div><span style="color:var(--ps-glow);">4.</span> Install & Enjoy!</div>
             </div>
         </div>
@@ -221,7 +236,7 @@
             <form action="https://formspree.io/f/xojjjqbo" method="POST">
                 <input type="text" name="name" placeholder="YOUR NAME" required style="width:100%; padding:12px; margin-bottom:10px; background:#0d1117; border:1px solid var(--accent); color:white;">
                 <input type="tel" name="phone" placeholder="WHATSAPP NUMBER" required style="width:100%; padding:12px; margin-bottom:10px; background:#0d1117; border:1px solid var(--accent); color:white;">
-                <input type="email" name="email" placeholder="EMAIL ADDRESS(To recieve the GAME)" required style="width:100%; padding:12px; margin-bottom:10px; background:#0d1117; border:1px solid var(--accent); color:white;">
+                <input type="email" name="email" placeholder="EMAIL ADDRESS" required style="width:100%; padding:12px; margin-bottom:10px; background:#0d1117; border:1px solid var(--accent); color:white;">
                 <input type="text" name="tid" placeholder="TRANSACTION ID" required style="width:100%; padding:12px; margin-bottom:10px; background:#0d1117; border:1px solid var(--accent); color:white;">
                 <input type="hidden" name="games" id="hiddenCartInput">
                 <button type="submit" class="buy-now" onclick="document.getElementById('step3').classList.add('active')">VERIFY PAYMENT</button>
@@ -303,16 +318,16 @@
             { name: "Alan Wake 2", img: "alanwake2.jpg", trailer: "dlQ3Fe69A24" },
             { name: "Hogwarts Legacy", img: "hogwarts.jpg", trailer: "1O6Qstncpno" },
             { name: "Minecraft", img: "minecraft.jpg", trailer: "MmB9b5njVpA" },
-            { name: "Assassin's Creed:Valhalla", img: "acv.jpg", trailer: "k-BGWngy6uI" },
+            { name: "AC Mirage", img: "acm.jpg", trailer: "k-BGWngy6uI" },
             { name: "Dying Light 2", img: "dl2.jpg", trailer: "UwJAAy7tPhE" },
             { name: "Far Cry 6", img: "fc6.jpg", trailer: "0v9id_u25X0" },
             { name: "God of War 2018", img: "gow2018.jpg", trailer: "K0u_kFBclV8" },
             { name: "Spider-Man Remastered", img: "spiderman.jpg", trailer: "8U2uXU-fG7k" },
-            { name: "Assetto Corsa Competizione", img: "acc.jpg", trailer: "39W-MAs6YkI" }
+            { name: "Assetto Corsa", img: "ac.jpg", trailer: "39W-MAs6YkI" }
         ];
 
         let cart = [];
-        const names = ["Aaryan1884", "Vivekw994bxuser", "Siddharth.malh", "Ishaan_kki.", "ManishK.", "Rahulxd110", "Priyaxlive", "Sahil_gupta", "Karan_kumar", "Rohanuser92983", "user2773bg", "userbhdb8"];
+        const names = ["Aaryan", "Vivek", "Siddharth", "Ishaan", "Manish", "Rahul", "Priya", "Sahil", "Karan", "Rohan"];
 
         // GLOW ORB MOVEMENT
         const glow = document.getElementById('cursor-glow');
@@ -321,23 +336,45 @@
             glow.style.top = e.clientY + 'px';
         });
 
+        // -----------------------------------------------------
+        // UPDATED RENDER FUNCTION WITH AD INJECTION
+        // -----------------------------------------------------
         function render() {
-            document.getElementById('game-grid').innerHTML = games.map((g, i) => `
-                <div class="card">
-                    <div class="img-container"><img src="${g.img}" onerror="this.src='https://via.placeholder.com/300x450/111/00d4ff?text=${g.name}'"></div>
-                    <div class="info">
-                        <div class="title">${g.name}</div>
-                        <div class="price">₹50</div>
-                        <button class="trailer-btn" onclick="openTrailer('${g.trailer}')">TRAILER</button>
-                        <button class="buy-now" onclick="addToCart(${i})">ADD TO CART</button>
-                    </div>
-                </div>`).join('');
-            
+            const gameGrid = document.getElementById('game-grid');
+            let htmlContent = '';
+
+            games.forEach((g, i) => {
+                // Create the standard game card
+                htmlContent += `
+                    <div class="card">
+                        <div class="img-container"><img src="${g.img}" onerror="this.src='https://via.placeholder.com/300x450/111/00d4ff?text=${g.name}'"></div>
+                        <div class="info">
+                            <div class="title">${g.name}</div>
+                            <div class="price">₹50</div>
+                            <button class="trailer-btn" onclick="openTrailer('${g.trailer}')">TRAILER</button>
+                            <button class="buy-now" onclick="addToCart(${i})">ADD TO CART</button>
+                        </div>
+                    </div>`;
+
+                // INJECT AD SLOT after every 12 games
+                if ((i + 1) % 12 === 0) {
+                    htmlContent += `
+                        <div class="card ad-slot">
+                            <div id="container-fa5d44084a06a882251f0ec431ff7738"></div>
+                            <span style="position: absolute; top: 5px; right: 10px; font-size: 0.6rem; color: var(--ps-blue); font-family: 'Orbitron';">SPONSORED</span>
+                        </div>`;
+                }
+            });
+
+            gameGrid.innerHTML = htmlContent;
+
+            // Re-run the reveal observer
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('reveal'); });
             }, { threshold: 0.1 });
             document.querySelectorAll('.card').forEach(card => observer.observe(card));
         }
+        // -----------------------------------------------------
 
         setInterval(() => {
             const count = 240 + Math.floor(Math.random() * 20);
@@ -402,9 +439,9 @@
 
         render();
     </script>
-    <script type='text/javascript' src="https://pl28510785.effectivegatecpm.com/53/5c/45/535c45748548cc4163baae72d1981f90.js"></script>
-</body>
+
+    <script async="async" data-cfasync="false" src="https://pl28510920.effectivegatecpm.com/fa5d44084a06a882251f0ec431ff7738/invoke.js"></script>
+   
+    <script src="https://pl28510785.effectivegatecpm.com/53/5c/45/535c45748548cc4163baae72d1981f90.js"></script>
+    </body>
 </html>
-
-
-
