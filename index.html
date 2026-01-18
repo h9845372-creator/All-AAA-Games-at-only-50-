@@ -100,7 +100,7 @@
 </head>
 <body>
 
-    <div class="trust-top-bar"><i class="fa-solid fa-shield-halved"></i> 100% SECURE TRANSACTIONS • VERIFIED 11,278+ SALES</div>
+    <div class="trust-top-bar"><i class="fa-solid fa-shield-halved"></i> 100% SECURE TRANSACTIONS • VERIFIED 11,287+ SALES</div>
 
     <header>
         <a href="#" class="logo"><img src="logo.png" style="height:40px;" onerror="this.style.display='none';"> LOWPRICEPLAY</a>
@@ -111,7 +111,7 @@
     </header>
 
     <section class="hero">
-        <h1>Any Game. <span>₹50.</span></h1>
+        <h1>Any Game. Same Prize.-<span>₹50.</span></h1>
         
         <div class="checker-container">
             <select id="userRam" class="checker-input"><option value="0">RAM SIZE</option><option value="4">4GB</option><option value="8">8GB</option><option value="16">16GB+</option></select>
@@ -150,7 +150,7 @@
 
     <div class="modal-overlay" id="payModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center;">
         <div style="background:#1c2128; padding:2rem; border-radius:20px; width:90%; max-width:400px; text-align:center; border:1px solid var(--ps-glow);">
-            <h2 style="font-family:'Orbitron';">PAYMENT</h2>
+            <h2 style="font-family:'Orbitron';">PAYMENT | Pay To This UPI-ID 👇</h2>
             <div style="background:#0d1117; border:1px dashed var(--ps-glow); padding:15px; margin:15px 0; display:flex; justify-content:space-between; align-items:center;">
                 <span style="color:var(--ps-glow); font-size:0.8rem;">devimanju1203@okicici</span>
                 <button onclick="copyUPI()" style="background:var(--ps-glow); border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">COPY</button>
@@ -174,13 +174,57 @@
         </div>
     </div>
 
-    <a href="https://wa.me/918329719189" class="whatsapp-float" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="https://wa.me/+91 8329719189" class="whatsapp-float" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
     <div id="live-purchase">
         <div style="width:30px; height:30px; border-radius:50%; background:var(--ps-glow); color:black; display:flex; align-items:center; justify-content:center; font-weight:bold;">U</div>
         <div id="pop-text" style="font-size:0.8rem;">Recent Sale...</div>
     </div>
+   
+    <footer style="background: #0d1117; border-top: 1px solid var(--accent); padding: 4rem 5% 2rem; margin-top: 5rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-bottom: 3rem; opacity: 0.8;">
+                <div style="display: flex; align-items: center; gap: 10px; color: #fff; font-family: 'Rajdhani'; font-weight: bold;">
+                    <i class="fa-brands fa-google-pay" style="font-size: 2.5rem; color: #fff;"></i>
+                    <span>VERIFIED MERCHANT</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; color: #00ff88; font-family: 'Rajdhani'; font-weight: bold;">
+                    <i class="fa-solid fa-shield-check" style="font-size: 2rem;"></i>
+                    <span>NORTON SECURED</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; color: var(--ps-glow); font-family: 'Rajdhani'; font-weight: bold;">
+                    <i class="fa-solid fa-lock" style="font-size: 1.8rem;"></i>
+                    <span>SSL SECURE</span>
+                </div>
+            </div>
 
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                <div>
+                    <h3 style="color: var(--ps-glow); margin-bottom: 20px; font-size: 1.2rem;">FAQs</h3>
+                    <div style="font-family: 'Rajdhani'; font-size: 0.95rem;">
+                        <details style="border-bottom: 1px solid var(--accent); padding: 10px 0; cursor: pointer;">
+                            <summary style="font-weight: bold; color: #eee;">How will I receive the game?</summary>
+                            <p style="padding-top: 10px; opacity: 0.7;">You will receive a high-speed torrent file and installation guide on your registered Email/WhatsApp.</p>
+                        </details>
+                        <details style="border-bottom: 1px solid var(--accent); padding: 10px 0; cursor: pointer;">
+                            <summary style="font-weight: bold; color: #eee;">Is it safe to install?</summary>
+                            <p style="padding-top: 10px; opacity: 0.7;">Yes, all files are pre-activated and scanned for security. No external cracks needed.</p>
+                        </details>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--danger); margin-bottom: 20px; font-size: 1.2rem;">DISCLAIMER</h3>
+                    <p style="font-size: 0.8rem; opacity: 0.6; line-height: 1.6;">
+                        LowPricePlay is a platform for digital backup access. We do not claim ownership of game IPs. 
+                        Payments are for service, bandwidth, and maintenance. All rights belong to original developers.
+                    </p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 4rem; opacity: 0.3; font-size: 0.7rem;">&copy; 2026 LOWPRICEPLAY</div>
+        </div>
+    </footer>
     <script>
         const games = [
             { name: "GTA VI (Early Access)", img: "gta6.jpg", old: 5999, trailer: "QdBZY2fkU-0" },
@@ -214,12 +258,12 @@
             { name: "Alan Wake 2", img: "alanwake2.jpg", old: 3499, trailer: "dlQ3Fe69A24" },
             { name: "Hogwarts Legacy", img: "hogwarts.jpg", old: 3999, trailer: "1O6Qstncpno" },
             { name: "Minecraft", img: "minecraft.jpg", old: 1999, trailer: "MmB9b5njVpA" },
-            { name: "AC Mirage", img: "acm.jpg", old: 3499, trailer: "k-BGWngy6uI" },
+            { name: "Assassin's Creed:Valhalla", img: "acv.jpg", old: 3499, trailer: "k-BGWngy6uI" },
             { name: "Dying Light 2", img: "dl2.jpg", old: 2999, trailer: "UwJAAy7tPhE" },
             { name: "Far Cry 6", img: "fc6.jpg", old: 3999, trailer: "0v9id_u25X0" },
             { name: "God of War 2018", img: "gow2018.jpg", old: 3299, trailer: "K0u_kFBclV8" },
             { name: "Spider-Man Remastered", img: "spiderman.jpg", old: 3999, trailer: "8U2uXU-fG7k" },
-            { name: "Assetto Corsa", img: "ac.jpg", old: 1499, trailer: "39W-MAs6YkI" }
+            { name: "Assetto Corsa Competizione", img: "acc.jpg", old: 1499, trailer: "39W-MAs6YkI" }
         ];
 
         let cart = [];
@@ -291,3 +335,4 @@
     </script>
 </body>
 </html>
+
