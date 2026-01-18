@@ -21,6 +21,26 @@
             --whatsapp: #25D366;
         }
 
+        /* LIVE PULSE ANIMATION */
+        .pulse-dot {
+            height: 8px;
+            width: 8px;
+            background-color: #002e1a; /* Darker green base */
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            position: relative;
+            background: var(--success);
+            box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         body { background: var(--dark-bg); color: var(--text); overflow-x: hidden; font-family: 'Inter', sans-serif; }
         h1, h2, h3, .logo, .price { font-family: 'Orbitron', sans-serif; letter-spacing: 1px; }
@@ -71,18 +91,18 @@
         .cart-icon { position: relative; cursor: pointer; font-size: 1.4rem; }
         .cart-count { position: absolute; top: -10px; right: -10px; background: var(--danger); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 50%; }
 
-        /* CART SIDEBAR - UPDATED POSITION TO UPPER RIGHT */
+        /* CART SIDEBAR - UPPER RIGHT */
         #cart-sidebar { 
             position: fixed; 
-            top: 20px; /* Offset from top */
+            top: 20px; 
             right: -400px; 
             width: 380px; 
-            max-height: 90vh; /* Prevents overflow of screen */
+            max-height: 90vh; 
             background: #0d1117; 
             z-index: 2000; 
             padding: 1.5rem; 
             border: 1px solid var(--accent); 
-            border-radius: 20px 0 0 20px; /* Stylish rounded corners */
+            border-radius: 20px 0 0 20px; 
             display: flex; 
             flex-direction: column; 
             box-shadow: -10px 0 30px rgba(0,0,0,0.5);
@@ -105,7 +125,7 @@
         .video-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 11000; backdrop-filter: blur(10px); }
         .video-container { width: 90%; max-width: 800px; aspect-ratio: 16/9; position: relative; border: 2px solid var(--ps-blue); }
         .close-video { position: absolute; top: -45px; right: 0; color: white; font-size: 2.5rem; cursor: pointer; }
-        .trust-top-bar { background: linear-gradient(90deg, #0072ce, #00d4ff); color: black; font-family: 'Orbitron'; font-size: 0.65rem; font-weight: 900; text-align: center; padding: 5px 0; text-transform: uppercase; }
+        .trust-top-bar { background: linear-gradient(90deg, #0072ce, #00d4ff); color: black; font-family: 'Orbitron'; font-size: 0.65rem; font-weight: 900; text-align: center; padding: 5px 0; text-transform: uppercase; display: flex; justify-content: center; align-items: center; gap: 20px; }
         #live-purchase { position: fixed; bottom: 20px; left: 20px; background: rgba(0, 0, 0, 0.9); border-left: 4px solid var(--ps-glow); padding: 12px 20px; border-radius: 8px; display: flex; align-items: center; gap: 15px; z-index: 10000; transform: translateX(-150%); border: 1px solid var(--accent); }
         #live-purchase.show { transform: translateX(0); }
         .step-card { text-align: center; background: #0d1117; padding: 25px; border-radius: 15px; border: 1px solid var(--accent); }
@@ -113,7 +133,12 @@
 </head>
 <body>
 
-    <div class="trust-top-bar"><i class="fa-solid fa-shield-halved"></i> 100% SECURE TRANSACTIONS • VERIFIED 11,278+ SALES</div>
+    <div class="trust-top-bar">
+        <span><i class="fa-solid fa-shield-halved"></i> 100% SECURE TRANSACTIONS</span>
+        <span style="border-left: 1px solid rgba(0,0,0,0.2); padding-left: 20px;">
+            <span class="pulse-dot"></span> <span id="live-user-count">245</span> GAMERS ONLINE
+        </span>
+    </div>
 
     <header>
         <a href="#" class="logo"><img src="logo.png" style="height:40px;" onerror="this.style.display='none';"> LOWPRICEPLAY</a>
@@ -289,6 +314,12 @@
             }, { threshold: 0.1 });
             document.querySelectorAll('.card').forEach(card => observer.observe(card));
         }
+
+        // Live user count fluctuation
+        setInterval(() => {
+            const count = 240 + Math.floor(Math.random() * 20);
+            document.getElementById('live-user-count').innerText = count;
+        }, 3000);
 
         function addToCart(i) { 
             if(!cart.includes(i)) { cart.push(i); updateCart(); } 
