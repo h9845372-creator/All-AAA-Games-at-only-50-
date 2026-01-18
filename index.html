@@ -245,17 +245,18 @@
             <h2 id="modalTitle">SECURE PAYMENT</h2>
             <p style="font-size:0.8rem; opacity:0.7;" id="modalDesc">Copy UPI ID • 100% Trusted Gateway</p>
             <div class="upi-box">
-                <span class="upi-id" id="upiIdText">devimanju1203@okicici</span>
+                <span class="upi-id" id="upiIdText">lowprice@upi</span>
                 <button class="copy-btn" onclick="copyUPI()">COPY</button>
             </div>
 
             <form action="https://formspree.io/f/xojjjqbo" method="POST" id="salesForm" style="margin-top: 15px;">
                 <input type="text" name="name" placeholder="YOUR NAME" required class="modal-input">
+                <input type="tel" name="phone" placeholder="YOUR WHATSAPP NUMBER" required class="modal-input">
                 <input type="email" name="email" placeholder="YOUR EMAIL (TO RECEIVE GAME)" required class="modal-input">
                 <input type="text" name="transaction_id" placeholder="UPI TRANSACTION ID" required class="modal-input">
                 <input type="hidden" name="cart_items" id="hiddenCartInput">
                 <input type="hidden" name="_subject" value="New Game Order Recieved!">
-                <button type="submit" class="buy-now">VERIFY & SUBMIT ORDER</button>
+                <button type="submit" class="buy-now">VERIFY & SEND VIA BOT</button>
             </form>
 
             <div style="margin-top:15px; font-size: 0.6rem; opacity: 0.5; display: flex; justify-content: center; gap: 10px;">
@@ -456,4 +457,3 @@
     </script>
 </body>
 </html>
-
