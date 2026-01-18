@@ -1,46 +1,293 @@
-<div id="cart-sidebar">
-    <h3 style="color:var(--ps-glow); border-bottom:1px solid var(--accent); padding-bottom:10px; font-family:'Orbitron'; font-size:1.1rem;">YOUR CART</h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <div id="cart-list" style="flex:1; overflow-y:auto; margin-top:20px; padding-right:5px;">
-        </div>
+    <link rel="icon" href="logo.png" type="image/png">
+
+    <title>LowPricePlay | Premium Games at ₹50</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Rajdhani:wght@500;700&family=Inter:wght@400;800&display=swap" rel="stylesheet">
     
-    <div style="border-top:1px solid var(--accent); padding-top:20px; background: #0d1117;">
-        <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-family:'Orbitron';">
-            <span>TOTAL:</span>
-            <span id="cart-total" style="color:var(--ps-glow);">₹0</span>
-        </div>
-        <button class="buy-now" onclick="checkout()">PROCEED TO CHECKOUT</button>
-        <p onclick="toggleCart()" style="text-align:center; margin-top:15px; cursor:pointer; opacity:0.6; font-size:0.8rem; font-family:'Rajdhani';">CONTINUE SHOPPING</p>
-    </div>
-</div>
-
-<script>
-    /* ... existing games array and other functions remain untouched ... */
-
-    // UPGRADED updateCart function to handle images and details
-    function updateCart() {
-        const cartList = document.getElementById('cart-list');
-        const cartCount = document.getElementById('cart-count');
-        const cartTotal = document.getElementById('cart-total');
-
-        if (cart.length === 0) {
-            cartList.innerHTML = `<div style="text-align:center; margin-top:50px; opacity:0.5; font-family:'Rajdhani';">YOUR CART IS EMPTY</div>`;
-        } else {
-            cartList.innerHTML = cart.map(i => `
-                <div style="display:flex; align-items:center; gap:15px; margin-bottom:20px; background:rgba(255,255,255,0.03); padding:10px; border-radius:10px; border:1px solid var(--accent);">
-                    <img src="${games[i].img}" style="width:60px; height:80px; object-fit:cover; border-radius:5px;" onerror="this.src='https://via.placeholder.com/60/111/00d4ff?text=G'">
-                    <div style="flex:1;">
-                        <div style="font-family:'Rajdhani'; font-weight:bold; font-size:0.9rem; color:white; line-height:1.2; margin-bottom:5px;">${games[i].name}</div>
-                        <div style="color:var(--ps-glow); font-family:'Orbitron'; font-size:0.8rem;">₹50</div>
-                    </div>
-                    <i class="fa-solid fa-trash-can" onclick="removeFromCart(${i})" style="color:var(--danger); cursor:pointer; padding:10px;"></i>
-                </div>
-            `).join('');
+    <style>
+        :root {
+            --ps-blue: #0072ce;
+            --ps-glow: #00d4ff;
+            --dark-bg: #0a0b10;
+            --card-bg: #161b22;
+            --text: #ffffff;
+            --accent: #30363d;
+            --danger: #ff4d4d;
+            --success: #00ff88;
+            --whatsapp: #25D366;
         }
 
-        cartTotal.innerText = `₹${cart.length * 50}`;
-        cartCount.innerText = cart.length;
-    }
+        * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        body { background: var(--dark-bg); color: var(--text); overflow-x: hidden; font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .logo, .price { font-family: 'Orbitron', sans-serif; letter-spacing: 1px; }
+        .title, .buy-now, .search-bar { font-family: 'Rajdhani', sans-serif; text-transform: uppercase; }
 
-    /* ... remaining functions (checkout, render, etc.) remain untouched ... */
-</script>
+        /* SCROLL REVEAL INITIAL STATE */
+        .card { 
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+            background: var(--card-bg); 
+            border-radius: 15px; 
+            border: 1px solid var(--accent); 
+            overflow: hidden; 
+            position: relative; 
+            z-index: 1;
+        }
+
+        .card.reveal { opacity: 1; transform: translateY(0); }
+
+        /* HOLOGRAPHIC GLOW EFFECT */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(0, 212, 255, 0.2), transparent);
+            transform: skewX(-25deg);
+            z-index: 2;
+        }
+
+        .card:hover { 
+            transform: translateY(-10px) !important; 
+            border-color: var(--ps-glow); 
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .card:hover::before { animation: lightSweep 0.8s; left: 125%; }
+
+        @keyframes lightSweep { 0% { left: -100%; } 100% { left: 125%; } }
+
+        /* HEADER & UI */
+        header { background: rgba(10,11,16,0.95); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--accent); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(15px); }
+        .logo { font-weight: 900; color: var(--ps-glow); text-decoration: none; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .search-container { position: relative; width: 250px; }
+        .search-bar { width: 100%; padding: 10px 15px 10px 40px; background: #0d1117; border: 1px solid var(--accent); border-radius: 20px; color: white; outline: none; }
+        .search-container i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--ps-glow); }
+        .cart-icon { position: relative; cursor: pointer; font-size: 1.4rem; }
+        .cart-count { position: absolute; top: -10px; right: -10px; background: var(--danger); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 50%; }
+
+        /* UPGRADED CART SIDEBAR */
+        #cart-sidebar { position: fixed; top: 0; right: -400px; width: 380px; height: 100%; background: #0d1117; z-index: 2000; padding: 1.5rem; border-left: 1px solid var(--accent); display: flex; flex-direction: column; }
+        #cart-sidebar.open { right: 0; }
+        
+        /* OTHERS */
+        .hero { text-align: center; padding: 4rem 1rem 2rem; background: radial-gradient(circle at center, #1a2332 0%, #0a0b10 100%); }
+        .checker-container { max-width: 800px; margin: 0 auto 2rem; background: rgba(22, 27, 34, 0.6); border: 1px solid var(--accent); border-radius: 15px; padding: 20px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; align-items: center; }
+        .checker-input { background: #0d1117; border: 1px solid var(--accent); color: white; padding: 10px; border-radius: 8px; width: 180px; }
+        .check-btn { background: var(--ps-glow); color: black; border: none; padding: 10px 20px; border-radius: 8px; font-family: 'Orbitron'; font-weight: 900; cursor: pointer; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .img-container { height: 350px; overflow: hidden; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .info { padding: 1.5rem; text-align: center; }
+        .buy-now { width: 100%; padding: 14px; background: var(--ps-glow); border: none; border-radius: 8px; font-weight: 900; cursor: pointer; color: #000; }
+        .trailer-btn { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; padding: 8px 12px; border-radius: 5px; font-family: 'Rajdhani'; font-weight: bold; cursor: pointer; margin-bottom: 10px; display: inline-block; font-size: 0.8rem; width: 100%; }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: var(--whatsapp); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 10000; text-decoration: none; }
+        .video-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 11000; backdrop-filter: blur(10px); }
+        .video-container { width: 90%; max-width: 800px; aspect-ratio: 16/9; position: relative; border: 2px solid var(--ps-blue); }
+        .close-video { position: absolute; top: -45px; right: 0; color: white; font-size: 2.5rem; cursor: pointer; }
+        .trust-top-bar { background: linear-gradient(90deg, #0072ce, #00d4ff); color: black; font-family: 'Orbitron'; font-size: 0.65rem; font-weight: 900; text-align: center; padding: 5px 0; text-transform: uppercase; }
+        #live-purchase { position: fixed; bottom: 20px; left: 20px; background: rgba(0, 0, 0, 0.9); border-left: 4px solid var(--ps-glow); padding: 12px 20px; border-radius: 8px; display: flex; align-items: center; gap: 15px; z-index: 10000; transform: translateX(-150%); }
+        #live-purchase.show { transform: translateX(0); }
+        .step-card { text-align: center; background: #0d1117; padding: 25px; border-radius: 15px; border: 1px solid var(--accent); }
+    </style>
+</head>
+<body>
+
+    <div class="trust-top-bar"><i class="fa-solid fa-shield-halved"></i> 100% SECURE TRANSACTIONS • VERIFIED 11,278+ SALES</div>
+
+    <header>
+        <a href="#" class="logo"><img src="logo.png" style="height:40px;" onerror="this.style.display='none';"> LOWPRICEPLAY</a>
+        <div class="nav-right">
+            <div class="search-container"><i class="fa-solid fa-search"></i><input type="text" id="gameSearch" class="search-bar" placeholder="SEARCH GAMES..." onkeyup="filterGames()"></div>
+            <div class="cart-icon" onclick="toggleCart()"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cart-count">0</span></div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Any Game. <span>₹50.</span></h1>
+        
+        <div class="checker-container">
+            <select id="userRam" class="checker-input"><option value="0">RAM SIZE</option><option value="4">4GB</option><option value="8">8GB</option><option value="16">16GB+</option></select>
+            <select id="userGpu" class="checker-input"><option value="0">GPU POWER</option><option value="1">Low End</option><option value="2">GTX Series</option><option value="3">RTX Series</option></select>
+            <button class="check-btn" onclick="checkSystem()">RUN SYSTEM CHECK</button>
+            <div id="check-result" style="width:100%; margin-top:10px; font-weight:bold;"></div>
+        </div>
+
+        <div style="max-width: 800px; margin: 0 auto 3rem; padding: 25px; background: rgba(0, 114, 206, 0.05); border-radius: 15px; border: 1px dashed var(--ps-blue); text-align: left;">
+            <h3 style="font-family: 'Orbitron'; font-size: 0.8rem; color: var(--ps-glow); margin-bottom: 20px; text-align: center;">HOW YOU WILL GET YOUR GAME</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; font-family: 'Rajdhani';">
+                <div><span style="color:var(--ps-glow);">1.</span> Pay UPI & Submit ID.</div>
+                <div><span style="color:var(--ps-glow);">2.</span> Get Torrent file on Email.</div>
+                <div><span style="color:var(--ps-glow);">3.</span> Open via qBittorrent. <br> <a href="https://www.qbittorrent.org/download" target="_blank"><button style="background:transparent; border:1px solid var(--ps-glow); color:var(--ps-glow); font-size:0.6rem; padding:3px 8px; cursor:pointer; margin-top:5px;">GET QBITTORRENT</button></a></div>
+                <div><span style="color:var(--ps-glow);">4.</span> Install & Enjoy!</div>
+            </div>
+        </div>
+
+        <div class="how-it-works" style="max-width: 1000px; margin: 0 auto 4rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 0 20px;">
+            <div class="step-card"><i class="fa-solid fa-cart-arrow-down" style="color:var(--ps-glow); font-size:2rem;"></i><h4>SELECT</h4></div>
+            <div class="step-card"><i class="fa-solid fa-qrcode" style="color:var(--ps-glow); font-size:2rem;"></i><h4>PAY</h4></div>
+            <div class="step-card"><i class="fa-solid fa-play" style="color:var(--ps-glow); font-size:2rem;"></i><h4>PLAY</h4></div>
+        </div>
+    </section>
+
+    <div class="grid" id="game-grid"></div>
+
+    <div id="cart-sidebar">
+        <h3 style="color:var(--ps-glow); border-bottom:1px solid var(--accent); padding-bottom:10px; font-family:'Orbitron';">YOUR CART</h3>
+        <div id="cart-list" style="flex:1; overflow-y:auto; margin-top:20px;"></div>
+        <div style="border-top:1px solid var(--accent); padding-top:20px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-family:'Orbitron';"><span>TOTAL:</span><span id="cart-total">₹0</span></div>
+            <button class="buy-now" onclick="checkout()">CHECKOUT</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="payModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center;">
+        <div style="background:#1c2128; padding:2rem; border-radius:20px; width:90%; max-width:400px; text-align:center; border:1px solid var(--ps-glow);">
+            <h2 style="font-family:'Orbitron';">PAYMENT</h2>
+            <div style="background:#0d1117; border:1px dashed var(--ps-glow); padding:15px; margin:15px 0; display:flex; justify-content:space-between; align-items:center;">
+                <span style="color:var(--ps-glow); font-size:0.8rem;">devimanju1203@okicici</span>
+                <button onclick="copyUPI()" style="background:var(--ps-glow); border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">COPY</button>
+            </div>
+            <form action="https://formspree.io/f/xojjjqbo" method="POST">
+                <input type="text" name="name" placeholder="YOUR NAME" required style="width:100%; padding:12px; margin-bottom:10px; background:#0d1117; border:1px solid var(--accent); color:white;">
+                <input type="tel" name="phone" placeholder="WHATSAPP NUMBER" required style="width:100%; padding:12px; margin-bottom:10px; background:#0d1117; border:1px solid var(--accent); color:white;">
+                <input type="email" name="email" placeholder="EMAIL ADDRESS" required style="width:100%; padding:12px; margin-bottom:10px; background:#0d1117; border:1px solid var(--accent); color:white;">
+                <input type="text" name="tid" placeholder="TRANSACTION ID" required style="width:100%; padding:12px; margin-bottom:10px; background:#0d1117; border:1px solid var(--accent); color:white;">
+                <input type="hidden" name="games" id="hiddenCartInput">
+                <button type="submit" class="buy-now">VERIFY PAYMENT</button>
+            </form>
+            <p onclick="document.getElementById('payModal').style.display='none'" style="margin-top:15px; cursor:pointer; opacity:0.5;">CANCEL</p>
+        </div>
+    </div>
+
+    <div class="video-overlay" id="videoOverlay">
+        <div class="video-container">
+            <span class="close-video" onclick="closeTrailer()">&times;</span>
+            <iframe id="trailerFrame" width="100%" height="100%" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <a href="https://wa.me/918329719189" class="whatsapp-float" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+
+    <div id="live-purchase">
+        <div style="width:30px; height:30px; border-radius:50%; background:var(--ps-glow); color:black; display:flex; align-items:center; justify-content:center; font-weight:bold;">U</div>
+        <div id="pop-text" style="font-size:0.8rem;">Recent Sale...</div>
+    </div>
+
+    <script>
+        const games = [
+            { name: "GTA VI (Early Access)", img: "gta6.jpg", old: 5999, trailer: "QdBZY2fkU-0" },
+            { name: "Black Myth: Wukong", img: "wukong.jpg", old: 3999, trailer: "KxLpM09mE0Y" },
+            { name: "Dragon Ball: Sparking! ZERO", img: "dbz.jpg", old: 4299, trailer: "n6pE_t2tO_4" },
+            { name: "Spider-Man 2", img: "spiderman2.jpg", old: 4999, trailer: "qIQ3xNqk_u8" },
+            { name: "COD: Black Ops 6", img: "bo6.jpg", old: 5599, trailer: "m6H8Y_T_t_8" },
+            { name: "Uncharted: Legacy", img: "uncharted.jpg", old: 3299, trailer: "1e5y_0o6W_Y" },
+            { name: "Horizon Forbidden West", img: "hfw.jpg", old: 3999, trailer: "w0n0X-p18_o" },
+            { name: "FC 24 / FIFA 23", img: "fifa24.jpg", old: 3499, trailer: "vLj-27T-SEY" },
+            { name: "Sekiro", img: "sekiro.jpg", old: 3999, trailer: "rXMX4YJ7Lks" },
+            { name: "Starfield", img: "starfield.jpg", old: 4999, trailer: "pYqyVpCV-30" },
+            { name: "Witcher 3 Next-Gen", img: "witcher3.jpg", old: 1499, trailer: "c0i88t0K8ac" },
+            { name: "Days Gone", img: "daysgone.jpg", old: 3299, trailer: "FKtaOY9lMvM" },
+            { name: "Baldur's Gate 3", img: "bg3.jpg", old: 2999, trailer: "1T22ycKO564" },
+            { name: "Mortal Kombat 1", img: "mk1.jpg", old: 4499, trailer: "UZI9Gz8v03Q" },
+            { name: "Watch Dogs: Legion", img: "wdl.jpg", old: 2999, trailer: "mS7_O1oYp0A" },
+            { name: "Euro Truck Sim 2", img: "ets2.jpg", old: 999, trailer: "xlTuC18xVII" },
+            { name: "Ghostrunner 2", img: "ghostrunner.jpg", old: 2499, trailer: "nOIn_nAsu70" },
+            { name: "God of War Ragnarök", img: "gow.jpg", old: 4499, trailer: "hfJ4Km46A-0" },
+            { name: "Ghost of Tsushima", img: "ghost.jpg", old: 3499, trailer: "mXWkeS8mSok" },
+            { name: "GTA V Premium", img: "gta5.jpg", old: 2499, trailer: "hvoD7ehZPcM" },
+            { name: "Red Dead Redemption 2", img: "rdr2.jpg", old: 3199, trailer: "eaW0tYpxn0k" },
+            { name: "Miles Morales", img: "spiderman_m.jpg", old: 3299, trailer: "gHzuHo80U2M" },
+            { name: "Cyberpunk 2077", img: "cyberpunk.jpg", old: 2999, trailer: "P99qJGrPNLs" },
+            { name: "Elden Ring", img: "elden.jpg", old: 3599, trailer: "qLZenOn7WUo" },
+            { name: "EA SPORTS FC 26", img: "fc26.jpg", old: 4799, trailer: "fXpU1E8976Y" },
+            { name: "Tekken 8", img: "tekken8.jpg", old: 4199, trailer: "2S6p6fW-GkU" },
+            { name: "Forza Horizon 5", img: "forza.jpg", old: 3499, trailer: "FYH9n37B7Yw" },
+            { name: "Resident Evil 4", img: "re4.jpg", old: 3599, trailer: "j5Xv2lI9_uA" },
+            { name: "Alan Wake 2", img: "alanwake2.jpg", old: 3499, trailer: "dlQ3Fe69A24" },
+            { name: "Hogwarts Legacy", img: "hogwarts.jpg", old: 3999, trailer: "1O6Qstncpno" },
+            { name: "Minecraft", img: "minecraft.jpg", old: 1999, trailer: "MmB9b5njVpA" },
+            { name: "AC Mirage", img: "acm.jpg", old: 3499, trailer: "k-BGWngy6uI" },
+            { name: "Dying Light 2", img: "dl2.jpg", old: 2999, trailer: "UwJAAy7tPhE" },
+            { name: "Far Cry 6", img: "fc6.jpg", old: 3999, trailer: "0v9id_u25X0" },
+            { name: "God of War 2018", img: "gow2018.jpg", old: 3299, trailer: "K0u_kFBclV8" },
+            { name: "Spider-Man Remastered", img: "spiderman.jpg", old: 3999, trailer: "8U2uXU-fG7k" },
+            { name: "Assetto Corsa", img: "ac.jpg", old: 1499, trailer: "39W-MAs6YkI" }
+        ];
+
+        let cart = [];
+
+        function render() {
+            document.getElementById('game-grid').innerHTML = games.map((g, i) => `
+                <div class="card">
+                    <div class="img-container"><img src="${g.img}" onerror="this.src='https://via.placeholder.com/300x450/111/00d4ff?text=${g.name}'"></div>
+                    <div class="info">
+                        <div class="title">${g.name}</div>
+                        <div class="price">₹50</div>
+                        <button class="trailer-btn" onclick="openTrailer('${g.trailer}')">TRAILER</button>
+                        <button class="buy-now" onclick="addToCart(${i})">ADD TO CART</button>
+                    </div>
+                </div>`).join('');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('reveal'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.card').forEach(card => observer.observe(card));
+        }
+
+        function addToCart(i) { if(!cart.includes(i)) { cart.push(i); updateCart(); } toggleCart(); }
+
+        function updateCart() {
+            const list = document.getElementById('cart-list');
+            if(cart.length === 0) {
+                list.innerHTML = `<div style="text-align:center; margin-top:50px; opacity:0.5;">EMPTY</div>`;
+            } else {
+                list.innerHTML = cart.map(i => `
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px; background:rgba(255,255,255,0.05); padding:10px; border-radius:10px;">
+                        <img src="${games[i].img}" style="width:50px; height:65px; object-fit:cover; border-radius:5px;">
+                        <div style="flex:1;">
+                            <div style="font-size:0.8rem; font-weight:bold; color:white;">${games[i].name}</div>
+                            <div style="color:var(--ps-glow); font-size:0.75rem;">₹50</div>
+                        </div>
+                        <i class="fa-solid fa-trash" onclick="removeFromCart(${i})" style="color:var(--danger); cursor:pointer;"></i>
+                    </div>`).join('');
+            }
+            document.getElementById('cart-total').innerText = `₹${cart.length * 50}`;
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        function removeFromCart(i) { cart = cart.filter(item => item !== i); updateCart(); }
+        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('open'); }
+        function openTrailer(id) { document.getElementById('trailerFrame').src = `https://www.youtube.com/embed/${id}?autoplay=1`; document.getElementById('videoOverlay').style.display = 'flex'; }
+        function closeTrailer() { document.getElementById('trailerFrame').src = ""; document.getElementById('videoOverlay').style.display = 'none'; }
+        function copyUPI() { navigator.clipboard.writeText("devimanju1203@okicici"); alert("UPI ID Copied!"); }
+        function checkout() { if(cart.length === 0) return; document.getElementById('hiddenCartInput').value = cart.map(i => games[i].name).join(', '); document.getElementById('payModal').style.display = 'flex'; }
+        function checkSystem() {
+            const ram = parseInt(document.getElementById('userRam').value);
+            const res = document.getElementById('check-result');
+            res.innerText = ram >= 8 ? "✓ READY TO PLAY!" : "⚠ LOW RAM DETECTED";
+            res.style.color = ram >= 8 ? "var(--success)" : "orange";
+        }
+        function filterGames() {
+            const q = document.getElementById('gameSearch').value.toLowerCase();
+            document.querySelectorAll('.card').forEach(c => {
+                const t = c.querySelector('.title').innerText.toLowerCase();
+                c.style.display = t.includes(q) ? 'block' : 'none';
+            });
+        }
+        setInterval(() => {
+            const popup = document.getElementById('live-purchase');
+            popup.classList.add('show'); setTimeout(() => popup.classList.remove('show'), 4000);
+        }, 12000);
+
+        render();
+    </script>
+</body>
+</html>
