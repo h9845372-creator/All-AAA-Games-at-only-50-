@@ -320,12 +320,12 @@
             { name: "Alan Wake 2", img: "alanwake2.jpg", trailer: "dlQ3Fe69A24" },
             { name: "Hogwarts Legacy", img: "hogwarts.jpg", trailer: "1O6Qstncpno" },
             { name: "Minecraft", img: "minecraft.jpg", trailer: "MmB9b5njVpA" },
-            { name: "AC Mirage", img: "acm.jpg", trailer: "k-BGWngy6uI" },
+            { name: "Assassin's Creed:Valhalla", img: "acv.jpg", trailer: "k-BGWngy6uI" },
             { name: "Dying Light 2", img: "dl2.jpg", trailer: "UwJAAy7tPhE" },
             { name: "Far Cry 6", img: "fc6.jpg", trailer: "0v9id_u25X0" },
             { name: "God of War 2018", img: "gow2018.jpg", trailer: "K0u_kFBclV8" },
             { name: "Spider-Man Remastered", img: "spiderman.jpg", trailer: "8U2uXU-fG7k" },
-            { name: "Assetto Corsa", img: "ac.jpg", trailer: "39W-MAs6YkI" }
+            { name: "Assetto Corsa Competizione", img: "acc.jpg", trailer: "39W-MAs6YkI" }
         ];
 
         let cart = [];
@@ -413,13 +413,15 @@
         function openTrailer(id) { document.getElementById('trailerFrame').src = `https://www.youtube.com/embed/${id}?autoplay=1`; document.getElementById('videoOverlay').style.display = 'flex'; }
         function closeTrailer() { document.getElementById('trailerFrame').src = ""; document.getElementById('videoOverlay').style.display = 'none'; }
         function copyUPI() { navigator.clipboard.writeText("devimanju1203@okicici"); alert("UPI ID Copied!"); }
-        function checkout() {
-    if(cart.length === 0) {
-        alert("Cart is empty!");
-        return;
-    }
-    // Test without the ad link first
-    document.getElementById('payModal').style.display = 'flex';
+        function checkout() { 
+    if(cart.length === 0) return; 
+
+    // USE THE COPIED URL HERE, NOT THE NAME
+    window.open('https://www.effectivegatecpm.com/canaceayyz?key=8582a3f1ab42c99a47590e4a5ff8067b', '_blank');
+
+    // This part opens the payment popup on your site
+    document.getElementById('hiddenCartInput').value = cart.map(i => games[i].name).join(', '); 
+    document.getElementById('payModal').style.display = 'flex'; 
 }
         
         function checkSystem() {
@@ -453,6 +455,7 @@
     <script src="https://pl28510785.effectivegatecpm.com/53/5c/45/535c45748548cc4163baae72d1981f90.js"></script>
     </body>
 </html>
+
 
 
 
