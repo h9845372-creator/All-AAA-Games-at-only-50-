@@ -413,15 +413,13 @@
         function openTrailer(id) { document.getElementById('trailerFrame').src = `https://www.youtube.com/embed/${id}?autoplay=1`; document.getElementById('videoOverlay').style.display = 'flex'; }
         function closeTrailer() { document.getElementById('trailerFrame').src = ""; document.getElementById('videoOverlay').style.display = 'none'; }
         function copyUPI() { navigator.clipboard.writeText("devimanju1203@okicici"); alert("UPI ID Copied!"); }
-        function checkout() { 
-    if(cart.length === 0) return; 
-
-    // 1. OPEN ADSTERRA DIRECT LINK (Paste your link here)
-    window.open('3120382', '_blank');
-
-    // 2. CONTINUE TO PAYMENT MODAL
-    document.getElementById('hiddenCartInput').value = cart.map(i => games[i].name).join(', '); 
-    document.getElementById('payModal').style.display = 'flex'; 
+        function checkout() {
+    if(cart.length === 0) {
+        alert("Cart is empty!");
+        return;
+    }
+    // Test without the ad link first
+    document.getElementById('payModal').style.display = 'flex';
 }
         
         function checkSystem() {
@@ -455,6 +453,7 @@
     <script src="https://pl28510785.effectivegatecpm.com/53/5c/45/535c45748548cc4163baae72d1981f90.js"></script>
     </body>
 </html>
+
 
 
 
