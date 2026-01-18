@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" href="logo.png" type="image/png">
+
     <title>LowPricePlay | Premium Games at ₹50</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Rajdhani:wght@500;700&family=Inter:wght@400;800&display=swap" rel="stylesheet">
@@ -58,6 +61,9 @@
 
         header { background: rgba(10,11,16,0.95); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--accent); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(15px); }
         .logo { font-weight: 900; color: var(--ps-glow); text-decoration: none; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        
+        .logo-img { height: 45px; width: auto; object-fit: contain; }
+
         .nav-right { display: flex; align-items: center; gap: 20px; }
         .search-container { position: relative; width: 250px; }
         .search-bar { width: 100%; padding: 10px 15px 10px 40px; background: #0d1117; border: 1px solid var(--accent); border-radius: 20px; color: white; outline: none; font-size: 1rem; }
@@ -168,7 +174,10 @@
     </div>
 
     <header>
-        <a href="#" class="logo"><i class="fa-solid fa-gamepad"></i> LOWPRICEPLAY</a>
+        <a href="#" class="logo">
+            <img src="logo.png" class="logo-img" alt="Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+            LOWPRICEPLAY
+        </a>
         <div class="nav-right">
             <div class="search-container"><i class="fa-solid fa-search"></i><input type="text" id="gameSearch" class="search-bar" placeholder="SEARCH GAMES..." onkeyup="filterGames()"></div>
             <div class="cart-icon" id="cartIcon" onclick="toggleCart()"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cart-count">0</span></div>
@@ -243,9 +252,9 @@
         <div class="modal">
             <i class="fa-solid fa-shield-check" style="font-size: 2.5rem; color: var(--success); margin-bottom: 15px;"></i>
             <h2 id="modalTitle">SECURE PAYMENT</h2>
-            <p style="font-size:0.8rem; opacity:0.7;" id="modalDesc">Copy UPI ID • 100% Trusted Gateway • Pay On This UPI-ID 👇</p>
+            <p style="font-size:0.8rem; opacity:0.7;" id="modalDesc">Copy UPI ID • 100% Trusted Gateway</p>
             <div class="upi-box">
-                <span class="upi-id" id="upiIdText">devimanju1203@okicici</span>
+                <span class="upi-id" id="upiIdText">lowprice@upi</span>
                 <button class="copy-btn" onclick="copyUPI()">COPY</button>
             </div>
 
@@ -279,9 +288,9 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/+91 8329719189?text=I%20need%20help%20with%20my%20order" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/910000000000?text=I%20need%20help%20with%20my%20order" class="whatsapp-float" target="_blank">
         <i class="fa-brands fa-whatsapp"></i>
-        <span class="whatsapp-label">Direct MSG</span>
+        <span class="whatsapp-label">SUPPORT</span>
     </a>
 
     <script>
@@ -311,6 +320,7 @@
             { name: "Call of Duty: Modern Warfare III", img: "mw3.jpg", old: 4999, ram: 16 },
             { name: "Watch Dogs: Legion", img: "wdl.jpg", old: 2999, ram: 12 },
             { name: "Ratchet & Clank: Rift Apart", img: "ratchet.jpg", old: 3999, ram: 16 },
+            { name: "Euro Truck Simulator 2", img: "ets2.jpg", old: 999, ram: 4 },
             { name: "Ghostrunner 2", img: "ghostrunner.jpg", old: 2499, ram: 12 },
 
             // --- EXISTING FAVORITES ---
@@ -350,7 +360,7 @@
             `).join('');
         }
 
-        const users = ["Rahul K.", "Aryan Gup.", "Vikramx101", "Snehaurp", "Kabir S.", "Rohitxlive", "Sameer KUMARI", "Zoya Khan", "Abhay tiwari", "Piyush Chaddhe", "harshurfather", "user283vg", "ruham220"];
+        const users = ["Rahul K.", "Aryan Gup.", "Vikramx101", "Snehaurp", "Kabir S.", "Rohitxlive", "Sameer KUMARI", "Zoya Khan", "Abhay tiwari", "Piyush Chaddhe", "harshurfather"];
         function showLivePurchase() {
             const popup = document.getElementById('live-purchase');
             if(!popup) return;
@@ -359,102 +369,146 @@
             document.getElementById('pop-id').innerText = randomUser.charAt(0);
             document.getElementById('pop-text').innerText = `${randomUser} bought ${randomGame}`;
             popup.classList.add('show');
-            setTimeout(() => { popup.classList.remove('show'); }, 4000);
+            setTimeout(() => popup.classList.remove('show'), 4000);
         }
-        setInterval(showLivePurchase, 10000);
+        setInterval(showLivePurchase, 15000);
+        setTimeout(showLivePurchase, 3000);
 
-        function toggleFaq(el) { el.parentElement.classList.toggle('active'); }
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('open');
+        }
 
-        function addToCart(event, index) {
-            const game = games[index];
-            if(cart.find(i => i.name === game.name)) return;
-            const btn = event.target;
+        function addToCart(e, index) {
+            // Animate flying particle
+            const btn = e.target;
             const rect = btn.getBoundingClientRect();
-            const cartIcon = document.getElementById('cartIcon').getBoundingClientRect();
             const particle = document.createElement('div');
-            particle.className = 'cart-particle';
-            particle.style.left = rect.left + 'px';
-            particle.style.top = rect.top + 'px';
+            particle.classList.add('cart-particle');
             document.body.appendChild(particle);
-            setTimeout(() => {
-                particle.style.left = cartIcon.left + 'px';
-                particle.style.top = cartIcon.top + 'px';
+            
+            particle.style.left = (rect.left + rect.width/2) + 'px';
+            particle.style.top = (rect.top + rect.height/2) + 'px';
+            
+            const cartIcon = document.getElementById('cartIcon').getBoundingClientRect();
+            
+            requestAnimationFrame(() => {
+                particle.style.left = (cartIcon.left + 10) + 'px';
+                particle.style.top = (cartIcon.top + 10) + 'px';
                 particle.style.opacity = '0';
-                particle.style.transform = 'scale(0.2)';
-            }, 10);
-            setTimeout(() => { particle.remove(); cart.push(game); updateCart(); }, 800);
+            });
+            
+            setTimeout(() => particle.remove(), 800);
+
+            // Logic
+            if (!cart.includes(index)) {
+                cart.push(index);
+                updateCart();
+            } else {
+                toggleCart();
+            }
         }
 
         function updateCart() {
-            document.getElementById('cart-count').innerText = cart.length;
-            const cartList = document.getElementById('cart-list');
-            if(cart.length === 0) {
-                cartList.innerHTML = `<div style="text-align:center; margin-top:50px; opacity:0.5; font-family:'Rajdhani';">YOUR LIBRARY IS EMPTY</div>`;
-            } else {
-                cartList.innerHTML = cart.map((item, idx) => `
-                    <div class="cart-item-card">
-                        <img src="${item.img}" class="cart-item-img" onerror="this.src='https://via.placeholder.com/60x80/111/00d4ff?text=G'">
-                        <div class="cart-item-info">
-                            <div class="cart-item-name">${item.name}</div>
-                            <div class="cart-item-details">PC VERSION | ₹50</div>
-                        </div>
-                        <i class="fa-solid fa-trash-can remove-item" onclick="removeFromCart(${idx})"></i>
+            const list = document.getElementById('cart-list');
+            const totalEl = document.getElementById('cart-total');
+            const countEl = document.getElementById('cart-count');
+            
+            list.innerHTML = cart.map(i => {
+                const g = games[i];
+                return `
+                <div class="cart-item-card">
+                    <img src="${g.img}" class="cart-item-img" onerror="this.src='https://via.placeholder.com/60x80'">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${g.name}</div>
+                        <div class="cart-item-details">PC EDITION • DIGITAL</div>
                     </div>
-                `).join('');
-            }
-            document.getElementById('cart-total').innerText = '₹' + (cart.length * 50);
+                    <i class="fa-solid fa-trash remove-item" onclick="removeFromCart(${i})"></i>
+                </div>`;
+            }).join('');
+            
+            totalEl.innerText = `₹${cart.length * 50}`;
+            countEl.innerText = cart.length;
         }
 
-        function removeFromCart(idx) { cart.splice(idx, 1); updateCart(); }
-        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('open'); }
-        
-        function checkout() { 
-            if(cart.length > 0) {
-                document.getElementById('modalTitle').innerText = "SECURE PAYMENT";
-                document.getElementById('modalDesc').innerText = "Copy UPI ID • 100% Trusted Gateway • Pay On This UPI-ID 👇";
-                const cartData = cart.map(item => item.name).join(', ');
-                document.getElementById('hiddenCartInput').value = cartData;
-                document.getElementById('payModal').style.display = 'flex'; 
+        function removeFromCart(index) {
+            cart = cart.filter(i => i !== index);
+            updateCart();
+        }
+
+        function checkout() {
+            if (cart.length === 0) return alert("Your cart is empty!");
+            document.getElementById('modalTitle').innerText = `PAY ₹${cart.length * 50} TO CHECKOUT`;
+            document.getElementById('modalDesc').innerText = `For ${cart.length} Games • Instant Delivery`;
+            document.getElementById('payModal').style.display = 'flex';
+            
+            // Prepare data for Formspree
+            const gameNames = cart.map(i => games[i].name).join(', ');
+            document.getElementById('hiddenCartInput').value = gameNames;
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        function copyUPI() {
+            const upiText = document.getElementById('upiIdText').innerText;
+            navigator.clipboard.writeText(upiText).then(() => {
+                alert("UPI ID Copied! Go to your payment app.");
+            });
+        }
+
+        function filterGames() {
+            const query = document.getElementById('gameSearch').value.toLowerCase();
+            const cards = document.getElementsByClassName('card');
+            Array.from(cards).forEach(card => {
+                const title = card.querySelector('.title').innerText.toLowerCase();
+                if (title.includes(query)) card.style.display = 'block';
+                else card.style.display = 'none';
+            });
+        }
+
+        function checkSystem() {
+            const ram = parseInt(document.getElementById('userRam').value);
+            const gpu = parseInt(document.getElementById('userGpu').value);
+            const res = document.getElementById('check-result');
+            
+            if(ram === 0 || gpu === 0) {
+                res.innerText = "Please select options.";
+                res.style.color = "yellow";
+                return;
+            }
+
+            if(ram >= 8 && gpu >= 2) {
+                res.innerHTML = "<i class='fa-solid fa-check'></i> EXCELLENT! YOU CAN RUN ALL GAMES.";
+                res.style.color = "var(--success)";
+            } else if (ram >= 4) {
+                res.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> GOOD FOR OLDER GAMES (GTA V, ETC).";
+                res.style.color = "orange";
+            } else {
+                res.innerHTML = "<i class='fa-solid fa-xmark'></i> MIGHT LAG ON NEW TITLES.";
+                res.style.color = "var(--danger)";
             }
         }
 
         function openDonate() {
-            document.getElementById('modalTitle').innerText = "DONATION SUPPORT";
-            document.getElementById('modalDesc').innerText = "Thank you for supporting LowPricePlay!";
-            document.getElementById('hiddenCartInput').value = "DONATION";
-            document.getElementById('payModal').style.display = 'flex';
+            const upiLink = "upi://pay?pa=lowprice@upi&pn=LowPricePlay&cu=INR";
+            // On mobile this might open app, on desktop we show alert
+            if(/Android|iPhone/i.test(navigator.userAgent)) {
+                window.location.href = upiLink;
+            } else {
+                alert("Scan this UPI ID in your app: lowprice@upi");
+            }
         }
 
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-        
-        function copyUPI() {
-            const text = document.getElementById('upiIdText').innerText;
-            navigator.clipboard.writeText(text);
-            const btn = document.querySelector('.copy-btn');
-            btn.innerText = "COPIED!";
-            setTimeout(() => { btn.innerText = "COPY"; }, 2000);
-        }
-
-        function checkSystem() {
-            const r = parseInt(document.getElementById('userRam').value);
-            if(r === 0) return;
-            let playable = games.filter(game => r >= game.ram).length;
-            document.getElementById('check-result').innerText = `YOU CAN RUN ${playable} GAMES!`;
-            document.getElementById('check-result').style.color = "var(--success)";
-        }
-
-        function filterGames() {
-            const q = document.getElementById('gameSearch').value.toLowerCase();
-            document.querySelectorAll('.card').forEach(c => {
-                const t = c.querySelector('.title').innerText.toLowerCase();
-                c.style.display = t.includes(q) ? 'block' : 'none';
-            });
-        }
-
+        // Initialize
         render();
-        updateCart();
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>
-
-
