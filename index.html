@@ -221,7 +221,7 @@
 
         <div class="how-it-works">
             <div class="step-card"><i class="fa-solid fa-cart-arrow-down"></i><h4>1. SELECT</h4><p>Add your favorites for ₹50 each.</p></div>
-            <div class="step-card"><i class="fa-solid fa-qrcode"></i><h4>2. PAY</h4><p>Send UPI screenshot to WhatsApp.</p></div>
+            <div class="step-card"><i class="fa-solid fa-qrcode"></i><h4>2. PAY</h4><p>Send UPI screenshot to WhatsApp(+91 8329719189).</p></div>
             <div class="step-card"><i class="fa-solid fa-cloud-arrow-down"></i><h4>3. PLAY</h4><p>Receive your link instantly.</p></div>
         </div>
     </section>
@@ -252,9 +252,9 @@
         <div class="modal">
             <i class="fa-solid fa-shield-check" style="font-size: 2.5rem; color: var(--success); margin-bottom: 15px;"></i>
             <h2 id="modalTitle">SECURE PAYMENT</h2>
-            <p style="font-size:0.8rem; opacity:0.7;" id="modalDesc">Copy UPI ID • 100% Trusted Gateway</p>
+            <p style="font-size:0.8rem; opacity:0.7;" id="modalDesc">Copy UPI ID • 100% Trusted Gateway • Pay To This UPI-ID 👇</p>
             <div class="upi-box">
-                <span class="upi-id" id="upiIdText">lowprice@upi</span>
+                <span class="upi-id" id="upiIdText">devimanju1203@okicici</span>
                 <button class="copy-btn" onclick="copyUPI()">COPY</button>
             </div>
 
@@ -288,9 +288,9 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/910000000000?text=I%20need%20help%20with%20my%20order" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/+91 8329719189?text=I%20need%20help%20with%20my%20order" class="whatsapp-float" target="_blank">
         <i class="fa-brands fa-whatsapp"></i>
-        <span class="whatsapp-label">SUPPORT</span>
+        <span class="whatsapp-label">DIRECT MSG</span>
     </a>
 
     <script>
@@ -320,7 +320,6 @@
             { name: "Call of Duty: Modern Warfare III", img: "mw3.jpg", old: 4999, ram: 16 },
             { name: "Watch Dogs: Legion", img: "wdl.jpg", old: 2999, ram: 12 },
             { name: "Ratchet & Clank: Rift Apart", img: "ratchet.jpg", old: 3999, ram: 16 },
-            { name: "Euro Truck Simulator 2", img: "ets2.jpg", old: 999, ram: 4 },
             { name: "Ghostrunner 2", img: "ghostrunner.jpg", old: 2499, ram: 12 },
 
             // --- EXISTING FAVORITES ---
@@ -360,7 +359,7 @@
             `).join('');
         }
 
-        const users = ["Rahul K.", "Aryan Gup.", "Vikramx101", "Snehaurp", "Kabir S.", "Rohitxlive", "Sameer KUMARI", "Zoya Khan", "Abhay tiwari", "Piyush Chaddhe", "harshurfather"];
+        const users = ["Rahul K.", "Aryan Gup.", "Vikramx101", "Snehaurp", "Kabir S.", "Rohitxlive", "Sameer KUMARI", "Zoya Khan", "Abhay tiwari", "Piyush Chaddhe", "harshurfather", "user193vb", "ruhano120sh", "shyamxd00"];
         function showLivePurchase() {
             const popup = document.getElementById('live-purchase');
             if(!popup) return;
@@ -491,12 +490,12 @@
         }
 
         function openDonate() {
-            const upiLink = "upi://pay?pa=lowprice@upi&pn=LowPricePlay&cu=INR";
+            const upiLink = "upi://pay?pa=devimanju1203@okicici&pn=LowPricePlay&cu=INR";
             // On mobile this might open app, on desktop we show alert
             if(/Android|iPhone/i.test(navigator.userAgent)) {
                 window.location.href = upiLink;
             } else {
-                alert("Scan this UPI ID in your app: lowprice@upi");
+                alert("Scan this UPI ID in your app: devimanju1203@okicici");
             }
         }
 
@@ -512,3 +511,4 @@
     </script>
 </body>
 </html>
+
